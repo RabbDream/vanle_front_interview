@@ -1,0 +1,48 @@
+
+<html>
+  <head></head>
+  <body></body>
+  <script>
+    /**
+ * @param {string} S
+ * @return {number[]}
+ */
+/**
+ * @param {string} S
+ * @return {number[]}
+ */
+
+ var splitIntoFibonacci = function(S) {
+  let res = []
+  let len = S.length
+  let backStr = function(list,start){
+    // console.log(list,start)
+    if(start==len) return list.length>=3
+    for(let i=start;i<len;i++){
+      let cur =  S.substr(start,i-start+1)
+      // console.log(cur)
+      if(i>start&&cur[0]==0) break
+      if(Number(cur)>Math.pow(2,31)-1) break
+      if(list.length>=2){
+        let listLen = list.length
+        let first = list[listLen-2]||0
+        let second = list[listLen-1]
+        if(cur<first+second){
+          continue
+        }else if(cur>first+second){
+          break
+        }
+      }
+      list.push(Number(cur))
+      console.log(list.length)
+      if(backStr(list,i+1)) return true
+      list.pop()
+    }
+    return false
+  }
+  backStr(res,0)
+  return res
+};
+splitIntoFibonacci('417420815174208193484163452262453871040871393665402264706273658371675923077949581449611550452755')
+  </script>
+</html>
